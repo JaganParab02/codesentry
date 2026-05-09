@@ -1,0 +1,270 @@
+/* ═══════════════════════════════════════════════════════════════
+   AMDMigrationPanel.css — CUDA → ROCm Migration Advisor styles
+   ═══════════════════════════════════════════════════════════════ */
+
+.amd-migration-panel {
+  background: var(--bg-card);
+  border: 1px solid rgba(232, 82, 42, 0.15);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  margin-top: var(--space-xl);
+}
+
+/* Header */
+.amd-mig-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
+}
+
+.amd-mig-header h3 {
+  font-size: 1.25rem;
+  color: #E8522A;
+}
+
+/* Score Section */
+.amd-score-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: var(--space-xl);
+}
+
+.amd-score-circle {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  margin-bottom: var(--space-md);
+}
+
+.amd-score-circle svg {
+  width: 140px;
+  height: 140px;
+  transform: rotate(-90deg);
+}
+
+.amd-score-circle-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.06);
+  stroke-width: 8;
+}
+
+.amd-score-circle-fill {
+  fill: none;
+  stroke-width: 8;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s cubic-bezier(0.4, 0, 0.2, 1),
+              stroke 0.4s ease;
+}
+
+.amd-score-value {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.amd-score-number {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1;
+  transition: color 0.4s ease;
+}
+
+.amd-score-pct {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-tertiary);
+}
+
+.amd-score-label {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  transition: color 0.4s ease;
+}
+
+/* Color helpers for score */
+.score-green { color: var(--low); }
+.score-yellow { color: var(--medium); }
+.score-orange { color: var(--high); }
+.score-red { color: var(--critical); }
+
+.stroke-green { stroke: var(--low); }
+.stroke-yellow { stroke: var(--medium); }
+.stroke-orange { stroke: var(--high); }
+.stroke-red { stroke: var(--critical); }
+
+/* Findings List */
+.amd-mig-findings {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.amd-mig-finding {
+  background: rgba(232, 82, 42, 0.04);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: all var(--transition-fast);
+}
+
+.amd-mig-finding:hover {
+  border-color: rgba(232, 82, 42, 0.2);
+}
+
+.amd-mig-finding-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  user-select: none;
+}
+
+.amd-mig-finding-header:hover {
+  background: rgba(232, 82, 42, 0.06);
+}
+
+.amd-mig-sev-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.amd-mig-sev-badge.sev-critical {
+  background: var(--critical-bg);
+  color: var(--critical);
+  border: 1px solid rgba(255, 45, 85, 0.3);
+}
+
+.amd-mig-sev-badge.sev-high {
+  background: var(--high-bg);
+  color: var(--high);
+  border: 1px solid rgba(255, 107, 53, 0.3);
+}
+
+.amd-mig-sev-badge.sev-medium {
+  background: var(--medium-bg);
+  color: var(--medium);
+  border: 1px solid rgba(255, 184, 0, 0.3);
+}
+
+.amd-mig-sev-badge.sev-low {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-primary);
+}
+
+.amd-mig-finding-id {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: #E8522A;
+  font-weight: 600;
+}
+
+.amd-mig-finding-title {
+  flex: 1;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.amd-mig-expand-btn {
+  background: none;
+  border: none;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 2px 4px;
+}
+
+/* Expanded detail */
+.amd-mig-finding-detail {
+  padding: var(--space-sm) var(--space-md) var(--space-md);
+  border-top: 1px solid var(--border-primary);
+  animation: fade-in 0.2s ease;
+}
+
+.amd-mig-file-loc {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-sm);
+}
+
+.amd-mig-description {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: var(--space-md);
+}
+
+.amd-mig-fix-section {
+  background: rgba(0, 255, 136, 0.04);
+  border: 1px solid rgba(0, 255, 136, 0.15);
+  border-radius: var(--radius-sm);
+  padding: var(--space-sm) var(--space-md);
+}
+
+.amd-mig-fix-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--low);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+.amd-mig-fix-text {
+  font-size: 0.8rem;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+/* Footer CTA */
+.amd-mig-footer {
+  text-align: center;
+  padding-top: var(--space-md);
+  border-top: 1px solid rgba(232, 82, 42, 0.1);
+}
+
+.amd-mig-footer-text {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-tertiary);
+}
+
+/* No findings message */
+.amd-no-findings {
+  text-align: center;
+  padding: var(--space-xl) 0;
+  color: var(--low);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.amd-no-findings-sub {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  margin-top: var(--space-xs);
+}

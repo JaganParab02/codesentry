@@ -1,0 +1,117 @@
+/* ═══════════════════════════════════════════════════════════════
+   AnalysisView.css — Premium Polish Pass
+   ═══════════════════════════════════════════════════════════════ */
+
+.analysis-view {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-primary);
+  background-image: 
+    linear-gradient(rgba(0, 240, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.02) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* ── Header ────────────────────────────────────────────────── */
+.header-center {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.scan-status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 6px 16px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-primary);
+}
+
+.elapsed-time {
+  color: var(--cyan);
+  font-size: 0.85rem;
+  padding: 4px 12px;
+  background: var(--cyan-subtle);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.1);
+}
+
+/* ── Panels ────────────────────────────────────────────────── */
+.agents-panel {
+  padding: var(--space-md);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  border-right: 1px solid var(--border-primary);
+  background: rgba(13, 18, 37, 0.4);
+}
+
+.findings-panel {
+  padding: var(--space-lg);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  background: radial-gradient(circle at top right, rgba(0, 240, 255, 0.03), transparent 40%);
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.panel-header h3 {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+}
+
+/* ── Live Stats ────────────────────────────────────────────── */
+.live-stats {
+  padding: var(--space-lg);
+  border: 1px solid rgba(0, 240, 255, 0.1);
+}
+
+.live-stats-header {
+  margin-bottom: var(--space-lg);
+}
+
+.stats-grid {
+  gap: var(--space-md);
+}
+
+.live-stat-value {
+  font-size: 1.5rem;
+  text-shadow: 0 0 10px currentColor;
+}
+
+/* ── Findings Feed ─────────────────────────────────────────── */
+.findings-feed {
+  gap: var(--space-md);
+}
+
+.finding-card {
+  border-left: 2px solid transparent;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.finding-card:hover {
+  transform: translateX(4px);
+  border-left-color: var(--cyan);
+}
+
+/* ── Completion Banner ─────────────────────────────────────── */
+.completion-banner {
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  background: linear-gradient(90deg, rgba(0, 255, 136, 0.05), transparent);
+  box-shadow: 0 0 30px rgba(0, 255, 136, 0.05);
+}

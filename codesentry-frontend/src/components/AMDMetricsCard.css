@@ -1,0 +1,203 @@
+/* ═══════════════════════════════════════════════════════════════
+   AMDMetricsCard.css — AMD MI300X live performance card styles
+   ═══════════════════════════════════════════════════════════════ */
+
+.amd-metrics-card {
+  background: linear-gradient(135deg, rgba(20, 10, 10, 0.9) 0%, rgba(13, 18, 37, 0.85) 100%);
+  border: 1px solid rgba(232, 82, 42, 0.25);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.amd-metrics-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #E8522A, #FF6B35, #E8522A, transparent);
+  opacity: 0.8;
+}
+
+.amd-metrics-card:hover {
+  border-color: rgba(232, 82, 42, 0.45);
+  box-shadow: 0 0 24px rgba(232, 82, 42, 0.12);
+}
+
+/* Header */
+.amd-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-lg);
+}
+
+.amd-header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.amd-header-icon {
+  font-size: 1.3rem;
+}
+
+.amd-header-title {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #E8522A;
+  letter-spacing: 0.03em;
+}
+
+.amd-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--low);
+  box-shadow: 0 0 8px rgba(0, 255, 136, 0.5);
+  animation: amd-pulse-dot 2s ease-in-out infinite;
+}
+
+.amd-status-dot.inactive {
+  background: var(--text-tertiary);
+  box-shadow: none;
+  animation: none;
+}
+
+@keyframes amd-pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* Stats Grid */
+.amd-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.amd-stat {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(232, 82, 42, 0.06);
+  border: 1px solid rgba(232, 82, 42, 0.1);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+
+.amd-stat:hover {
+  background: rgba(232, 82, 42, 0.1);
+  border-color: rgba(232, 82, 42, 0.2);
+}
+
+.amd-stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 2px;
+}
+
+.amd-stat-value {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.amd-stat-value.amd-accent {
+  color: #E8522A;
+}
+
+.amd-stat-value.temp-warm {
+  color: var(--medium);
+}
+
+.amd-stat-value.temp-hot {
+  color: var(--high);
+}
+
+.amd-stat-value.speed-fast {
+  color: var(--low);
+}
+
+/* VRAM bar */
+.amd-vram-bar-track {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-full);
+  margin-top: 4px;
+  overflow: hidden;
+}
+
+.amd-vram-bar-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  background: linear-gradient(90deg, #E8522A, #FF6B35);
+  box-shadow: 0 0 8px rgba(232, 82, 42, 0.4);
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Footer */
+.amd-footer {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--text-tertiary);
+  text-align: center;
+  letter-spacing: 0.08em;
+  padding-top: var(--space-sm);
+  border-top: 1px solid rgba(232, 82, 42, 0.1);
+}
+
+/* Scan complete message */
+.amd-complete-msg {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(0, 255, 136, 0.08);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--low);
+  margin-bottom: var(--space-md);
+  animation: fade-in-up 0.4s ease forwards;
+}
+
+/* Connecting placeholder */
+.amd-connecting {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-lg) 0;
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.amd-connecting-spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid rgba(232, 82, 42, 0.2);
+  border-top-color: #E8522A;
+  border-radius: 50%;
+  animation: amd-spin 0.8s linear infinite;
+}
+
+@keyframes amd-spin {
+  to { transform: rotate(360deg); }
+}

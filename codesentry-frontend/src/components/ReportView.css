@@ -1,0 +1,54 @@
+/* ═══════════════════════════════════════════════════════════════
+   ReportView.css — Premium Polish Pass
+   ═══════════════════════════════════════════════════════════════ */
+
+.report-view {
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(0, 102, 255, 0.05) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.05) 0px, transparent 50%);
+}
+
+.report-header h1 {
+  font-size: 3rem;
+  letter-spacing: -0.04em;
+  margin-bottom: var(--space-xs);
+}
+
+.summary-card {
+  border: 1px solid var(--border-primary);
+  background: rgba(255, 255, 255, 0.02);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.summary-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.summary-value {
+  text-shadow: 0 0 15px currentColor;
+}
+
+.chart-section, .export-section, .findings-table-section {
+  border: 1px solid var(--border-primary);
+  background: rgba(13, 18, 37, 0.6);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.findings-table th {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.findings-table tr:last-child td {
+  border-bottom: none;
+}
+
+.fix-card {
+  border: 1px solid var(--border-primary);
+  background: rgba(13, 18, 37, 0.4);
+}
+
+.diff-panel .code-block {
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}

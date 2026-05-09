@@ -1,0 +1,382 @@
+{
+  "meta": {
+    "scanId": "cs-20260507-a1b2c3d4",
+    "timestamp": "2026-05-07T10:30:00Z",
+    "source": "mock",
+    "filesAnalyzed": 24,
+    "linesScanned": 4872,
+    "duration": 12400
+  },
+  "events": [
+    {
+      "type": "agent_start",
+      "agent": "security",
+      "delay": 300,
+      "data": { "message": "Security Agent initializing...", "totalFiles": 24 }
+    },
+    {
+      "type": "agent_start",
+      "agent": "performance",
+      "delay": 600,
+      "data": { "message": "Performance Agent initializing...", "totalFiles": 24 }
+    },
+    {
+      "type": "progress",
+      "agent": "security",
+      "delay": 1200,
+      "data": { "percent": 15, "filesScanned": 4, "message": "Scanning auth modules..." }
+    },
+    {
+      "type": "finding",
+      "agent": "security",
+      "delay": 2000,
+      "data": {
+        "id": "SEC-001",
+        "title": "SQL Injection Vulnerability",
+        "severity": "critical",
+        "cwe": "CWE-89",
+        "description": "User input is directly concatenated into SQL query string without parameterization. An attacker could inject malicious SQL statements to access, modify, or delete database records.",
+        "file": "src/api/userController.js",
+        "line": 47,
+        "code": "const query = `SELECT * FROM users WHERE id = '${req.params.id}'`;",
+        "suggestion": "Use parameterized queries or an ORM to prevent SQL injection.",
+        "fixAvailable": true
+      }
+    },
+    {
+      "type": "progress",
+      "agent": "security",
+      "delay": 2800,
+      "data": { "percent": 30, "filesScanned": 7, "message": "Analyzing API endpoints..." }
+    },
+    {
+      "type": "finding",
+      "agent": "security",
+      "delay": 3500,
+      "data": {
+        "id": "SEC-002",
+        "title": "Hardcoded API Secret Key",
+        "severity": "high",
+        "cwe": "CWE-798",
+        "description": "API secret key is hardcoded directly in source code. If this code is committed to version control, the secret will be exposed to anyone with repository access.",
+        "file": "src/config/auth.js",
+        "line": 12,
+        "code": "const API_SECRET = 'sk-live-a8f29c4e1b3d5f6g7h8i9j0k1l2m3n4';",
+        "suggestion": "Move secrets to environment variables or a secrets manager like AWS Secrets Manager or HashiCorp Vault.",
+        "fixAvailable": true
+      }
+    },
+    {
+      "type": "progress",
+      "agent": "performance",
+      "delay": 3800,
+      "data": { "percent": 25, "filesScanned": 6, "message": "Profiling data access patterns..." }
+    },
+    {
+      "type": "finding",
+      "agent": "performance",
+      "delay": 4200,
+      "data": {
+        "id": "PERF-001",
+        "title": "N+1 Query Pattern Detected",
+        "severity": "high",
+        "cwe": null,
+        "description": "Database queries are executed inside a loop, causing N+1 query performance degradation. For 1000 users, this generates 1001 database queries instead of 2.",
+        "file": "src/services/reportService.js",
+        "line": 34,
+        "code": "users.forEach(async (user) => {\n  const orders = await db.query('SELECT * FROM orders WHERE user_id = ?', [user.id]);\n});",
+        "suggestion": "Use a single JOIN query or batch loading to eliminate the N+1 pattern. Estimated improvement: ~95% reduction in query count.",
+        "fixAvailable": true
+      }
+    },
+    {
+      "type": "finding",
+      "agent": "security",
+      "delay": 5000,
+      "data": {
+        "id": "SEC-003",
+        "title": "Unsafe eval() with User Input",
+        "severity": "high",
+        "cwe": "CWE-95",
+        "description": "The eval() function is called with user-controlled input, allowing arbitrary code execution. An attacker could execute malicious JavaScript on the server.",
+        "file": "src/utils/calculator.js",
+        "line": 23,
+        "code": "const result = eval(req.body.expression);",
+        "suggestion": "Replace eval() with a safe expression parser like math.js or expr-eval.",
+        "fixAvailable": true
+      }
+    },
+    {
+      "type": "progress",
+      "agent": "security",
+      "delay": 5500,
+      "data": { "percent": 55, "filesScanned": 13, "message": "Checking serialization handlers..." }
+    },
+    {
+      "type": "finding",
+      "agent": "security",
+      "delay": 6200,
+      "data": {
+        "id": "SEC-004",
+        "title": "Insecure Deserialization",
+        "severity": "critical",
+        "cwe": "CWE-502",
+        "description": "Untrusted data is deserialized using pickle without validation. An attacker could craft a malicious payload to execute arbitrary code during deserialization.",
+        "file": "src/ml/modelLoader.py",
+        "line": 89,
+        "code": "model = pickle.loads(uploaded_data)",
+        "suggestion": "Use safe serialization formats like JSON or implement strict type checking. For ML models, use safetensors or ONNX format.",
+        "fixAvailable": true
+      }
+    },
+    {
+      "type": "progress",
+      "agent": "performance",
+      "delay": 6500,
+      "data": { "percent": 50, "filesScanned": 12, "message": "Analyzing memory allocation patterns..." }
+    },
+    {
+      "type": "finding",
+      "agent": "performance",
+      "delay": 7000,
+      "data": {
+        "id": "PERF-002",
+        "title": "Memory Leak in Event Listener",
+        "severity": "medium",
+        "cwe": null,
+        "description": "Event listeners are registered in useEffect without cleanup. Over time, this causes memory to grow unbounded as listeners accumulate.",
+        "file": "src/components/Dashboard.jsx",
+        "line": 56,
+        "code": "useEffect(() => {\n  window.addEventListener('resize', handleResize);\n  // Missing: return () => window.removeEventListener('resize', handleResize);\n}, []);",
+        "suggestion": "Add cleanup function to useEffect to remove event listeners on unmount.",
+        "fixAvailable": true
+      }
+    },
+    {
+      "type": "finding",
+      "agent": "security",
+      "delay": 7800,
+      "data": {
+        "id": "SEC-005",
+        "title": "Missing CSRF Protection",
+        "severity": "medium",
+        "cwe": "CWE-352",
+        "description": "State-changing endpoints do not implement CSRF token validation. Attackers could trick authenticated users into performing unintended actions.",
+        "file": "src/middleware/auth.js",
+        "line": 15,
+        "code": "app.post('/api/transfer', authenticate, transferHandler);",
+        "suggestion": "Implement CSRF tokens using csurf middleware or SameSite cookie attributes.",
+        "fixAvailable": false
+      }
+    },
+    {
+      "type": "progress",
+      "agent": "security",
+      "delay": 8200,
+      "data": { "percent": 75, "filesScanned": 18, "message": "Inspecting authentication flows..." }
+    },
+    {
+      "type": "finding",
+      "agent": "performance",
+      "delay": 8500,
+      "data": {
+        "id": "PERF-003",
+        "title": "Unoptimized Tensor Operations",
+        "severity": "high",
+        "cwe": null,
+        "description": "Tensor operations are performed on CPU instead of GPU, and intermediate tensors are not freed. This wastes ~2.4GB of GPU memory and slows inference by 8x.",
+        "file": "src/ml/inference.py",
+        "line": 145,
+        "code": "for batch in dataloader:\n    output = model(batch.to('cpu'))  # Should be .to('cuda')\n    results.append(output)  # Tensors not detached",
+        "suggestion": "Move operations to GPU with .to('cuda'), use torch.no_grad() for inference, and detach tensors after use. Estimated memory savings: ~2.4GB.",
+        "fixAvailable": true
+      }
+    },
+    {
+      "type": "finding",
+      "agent": "security",
+      "delay": 9200,
+      "data": {
+        "id": "SEC-006",
+        "title": "Weak Password Hashing (MD5)",
+        "severity": "high",
+        "cwe": "CWE-328",
+        "description": "Passwords are hashed using MD5, which is cryptographically broken. Rainbow table attacks can crack MD5 hashes in seconds.",
+        "file": "src/auth/passwords.js",
+        "line": 8,
+        "code": "const hash = crypto.createHash('md5').update(password).digest('hex');",
+        "suggestion": "Use bcrypt, scrypt, or Argon2 for password hashing with proper salt rounds.",
+        "fixAvailable": true
+      }
+    },
+    {
+      "type": "progress",
+      "agent": "security",
+      "delay": 9600,
+      "data": { "percent": 90, "filesScanned": 22, "message": "Final security sweep..." }
+    },
+    {
+      "type": "progress",
+      "agent": "performance",
+      "delay": 9800,
+      "data": { "percent": 80, "filesScanned": 19, "message": "Checking render performance..." }
+    },
+    {
+      "type": "finding",
+      "agent": "security",
+      "delay": 10200,
+      "data": {
+        "id": "SEC-007",
+        "title": "Path Traversal Vulnerability",
+        "severity": "medium",
+        "cwe": "CWE-22",
+        "description": "File path is constructed using user input without sanitization. An attacker could use '../' sequences to access files outside the intended directory.",
+        "file": "src/api/fileHandler.js",
+        "line": 31,
+        "code": "const filePath = path.join(uploadDir, req.params.filename);",
+        "suggestion": "Validate and sanitize filename input. Use path.basename() to strip directory traversal sequences.",
+        "fixAvailable": false
+      }
+    },
+    {
+      "type": "finding",
+      "agent": "performance",
+      "delay": 10800,
+      "data": {
+        "id": "PERF-004",
+        "title": "Redundant Re-renders in Component Tree",
+        "severity": "low",
+        "cwe": null,
+        "description": "Parent component re-renders cause unnecessary re-renders of 12 child components due to missing memoization. This creates noticeable UI lag on data updates.",
+        "file": "src/components/DataGrid.jsx",
+        "line": 15,
+        "code": "const DataGrid = ({ data, filters }) => {\n  // Component re-renders on every parent state change\n  return data.map(row => <Row key={row.id} data={row} />);\n};",
+        "suggestion": "Wrap component with React.memo() and memoize callbacks with useCallback(). Use useMemo() for expensive data transformations.",
+        "fixAvailable": true
+      }
+    },
+    {
+      "type": "finding",
+      "agent": "security",
+      "delay": 11300,
+      "data": {
+        "id": "SEC-008",
+        "title": "Missing Rate Limiting on Auth Endpoints",
+        "severity": "low",
+        "cwe": "CWE-307",
+        "description": "Authentication endpoints lack rate limiting, enabling brute-force password attacks. An attacker could attempt thousands of password combinations per second.",
+        "file": "src/routes/auth.js",
+        "line": 5,
+        "code": "router.post('/login', loginHandler);",
+        "suggestion": "Implement rate limiting using express-rate-limit with a maximum of 5 attempts per minute per IP.",
+        "fixAvailable": false
+      }
+    },
+    {
+      "type": "progress",
+      "agent": "security",
+      "delay": 11500,
+      "data": { "percent": 100, "filesScanned": 24, "message": "Security scan complete" }
+    },
+    {
+      "type": "progress",
+      "agent": "performance",
+      "delay": 11700,
+      "data": { "percent": 100, "filesScanned": 24, "message": "Performance analysis complete" }
+    },
+    {
+      "type": "agent_start",
+      "agent": "fix",
+      "delay": 12000,
+      "data": { "message": "Fix Agent generating patches...", "totalFindings": 8 }
+    },
+    {
+      "type": "progress",
+      "agent": "fix",
+      "delay": 12500,
+      "data": { "percent": 25, "filesScanned": 2, "message": "Generating security patches..." }
+    },
+    {
+      "type": "fix_ready",
+      "agent": "fix",
+      "delay": 13200,
+      "data": {
+        "findingId": "SEC-001",
+        "title": "Fix: Parameterized SQL Query",
+        "before": "const query = `SELECT * FROM users WHERE id = '${req.params.id}'`;\nconst result = await db.execute(query);",
+        "after": "const query = 'SELECT * FROM users WHERE id = ?';\nconst result = await db.execute(query, [req.params.id]);",
+        "explanation": "Replaced string interpolation with parameterized query placeholder. The database driver now handles proper escaping, preventing SQL injection attacks."
+      }
+    },
+    {
+      "type": "progress",
+      "agent": "fix",
+      "delay": 13800,
+      "data": { "percent": 50, "filesScanned": 4, "message": "Patching credential exposure..." }
+    },
+    {
+      "type": "fix_ready",
+      "agent": "fix",
+      "delay": 14500,
+      "data": {
+        "findingId": "SEC-002",
+        "title": "Fix: Environment Variable for Secret Key",
+        "before": "const API_SECRET = 'sk-live-a8f29c4e1b3d5f6g7h8i9j0k1l2m3n4';",
+        "after": "const API_SECRET = process.env.API_SECRET;\nif (!API_SECRET) {\n  throw new Error('API_SECRET environment variable is required');\n}",
+        "explanation": "Moved the hardcoded secret to an environment variable with a runtime check. The secret should be stored in a .env file (excluded from version control) or a secrets manager."
+      }
+    },
+    {
+      "type": "fix_ready",
+      "agent": "fix",
+      "delay": 15500,
+      "data": {
+        "findingId": "SEC-004",
+        "title": "Fix: Safe Deserialization with Safetensors",
+        "before": "model = pickle.loads(uploaded_data)",
+        "after": "from safetensors.torch import load_file\n\n# Validate file extension\nif not filepath.endswith('.safetensors'):\n    raise ValueError('Only .safetensors format is accepted')\nmodel_state = load_file(filepath)\nmodel.load_state_dict(model_state)",
+        "explanation": "Replaced unsafe pickle deserialization with safetensors format, which cannot execute arbitrary code. Added file extension validation as an additional safety check."
+      }
+    },
+    {
+      "type": "progress",
+      "agent": "fix",
+      "delay": 16000,
+      "data": { "percent": 75, "filesScanned": 6, "message": "Generating performance patches..." }
+    },
+    {
+      "type": "fix_ready",
+      "agent": "fix",
+      "delay": 16800,
+      "data": {
+        "findingId": "SEC-006",
+        "title": "Fix: Bcrypt Password Hashing",
+        "before": "const hash = crypto.createHash('md5').update(password).digest('hex');",
+        "after": "const bcrypt = require('bcrypt');\nconst SALT_ROUNDS = 12;\n\nconst hash = await bcrypt.hash(password, SALT_ROUNDS);",
+        "explanation": "Replaced MD5 hashing with bcrypt, which is designed for password hashing. Salt rounds of 12 provide a good balance between security and performance (~250ms per hash)."
+      }
+    },
+    {
+      "type": "progress",
+      "agent": "fix",
+      "delay": 17200,
+      "data": { "percent": 100, "filesScanned": 8, "message": "All patches generated" }
+    },
+    {
+      "type": "complete",
+      "agent": "orchestrator",
+      "delay": 17500,
+      "data": {
+        "totalFindings": 12,
+        "critical": 2,
+        "high": 5,
+        "medium": 3,
+        "low": 2,
+        "fixesGenerated": 4,
+        "scanDuration": 17500,
+        "filesAnalyzed": 24,
+        "linesScanned": 4872
+      }
+    }
+  ]
+}

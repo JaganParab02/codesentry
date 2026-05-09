@@ -1,0 +1,123 @@
+/* ═══════════════════════════════════════════════════════════════
+   AgentCard.css — Agent status card styles
+   ═══════════════════════════════════════════════════════════════ */
+
+.agent-card {
+  padding: var(--space-md);
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.agent-card.scanning {
+  border-color: var(--border-hover);
+}
+
+.agent-card.scanning::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--agent-color), transparent);
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+.agent-card.complete {
+  border-color: rgba(0, 255, 136, 0.2);
+}
+
+.agent-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: var(--space-md);
+}
+
+.agent-identity {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.agent-icon {
+  font-size: 1.5rem;
+}
+
+.agent-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.agent-desc {
+  font-size: 0.72rem;
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+}
+
+.agent-status-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.agent-status-text {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.agent-card .progress-bar-track {
+  margin-bottom: var(--space-md);
+}
+
+.agent-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.agent-stat {
+  text-align: center;
+  padding: var(--space-xs) 0;
+}
+
+.stat-value {
+  display: block;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 0.65rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.agent-message {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  padding-top: var(--space-xs);
+  border-top: 1px solid var(--border-primary);
+}
+
+.message-dot {
+  color: var(--cyan);
+  font-weight: 700;
+  animation: blink 1s ease-in-out infinite;
+}

@@ -1,0 +1,121 @@
+.privacy-certificate {
+  padding: var(--space-xl);
+  margin-top: var(--space-xl);
+  border: 1px solid rgba(0, 255, 136, 0.15);
+  background: rgba(0, 255, 136, 0.03);
+  position: relative;
+  overflow: hidden;
+}
+
+.privacy-certificate::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--low), var(--cyan), var(--low));
+}
+
+.cert-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.cert-shield {
+  font-size: 2.5rem;
+}
+
+.cert-title {
+  font-size: 1.2rem;
+  color: var(--low);
+  margin-bottom: 2px;
+}
+
+.cert-subtitle {
+  font-size: 0.8rem;
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+}
+
+.cert-guarantees {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.cert-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+}
+
+.cert-check {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.cert-item strong {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.cert-item p {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  line-height: 1.4;
+}
+
+.cert-meta {
+  display: flex;
+  gap: var(--space-xl);
+  padding: var(--space-md);
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-md);
+}
+
+.cert-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cert-meta-label {
+  font-size: 0.65rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-family: var(--font-mono);
+}
+
+.cert-meta-value {
+  font-size: 0.78rem;
+  color: var(--cyan);
+}
+
+.cert-footer {
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--text-tertiary);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border-primary);
+}
+
+@media (max-width: 768px) {
+  .cert-guarantees {
+    grid-template-columns: 1fr;
+  }
+  .cert-meta {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+}

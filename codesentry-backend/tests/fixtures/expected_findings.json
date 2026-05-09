@@ -1,0 +1,84 @@
+{
+  "security_findings": [
+    {
+      "severity": "critical",
+      "title": "Insecure Pickle Deserialization",
+      "cwe": "CWE-502",
+      "owasp_category": "A04",
+      "line_number": 48,
+      "file_path": "vulnerable_ml_code.py",
+      "explanation": "pickle.load() from a user-controlled path allows arbitrary code execution"
+    },
+    {
+      "severity": "critical",
+      "title": "LLM Output Passed to eval()",
+      "cwe": "CWE-116",
+      "owasp_category": "LLM02",
+      "line_number": 78,
+      "file_path": "vulnerable_ml_code.py",
+      "explanation": "eval() on untrusted LLM output allows arbitrary code execution"
+    },
+    {
+      "severity": "critical",
+      "title": "Prompt Injection via String Concatenation",
+      "cwe": "CWE-74",
+      "owasp_category": "LLM01",
+      "line_number": 58,
+      "file_path": "vulnerable_ml_code.py",
+      "explanation": "User input directly concatenated into prompt string"
+    },
+    {
+      "severity": "critical",
+      "title": "Hardcoded HuggingFace Token",
+      "cwe": "CWE-798",
+      "owasp_category": "LLM06",
+      "line_number": 20,
+      "file_path": "vulnerable_ml_code.py",
+      "explanation": "Hardcoded API token exposed in source code"
+    },
+    {
+      "severity": "critical",
+      "title": "SQL Injection in RAG Query",
+      "cwe": "CWE-89",
+      "owasp_category": "A03",
+      "line_number": 90,
+      "file_path": "vulnerable_ml_code.py",
+      "explanation": "Unsanitised user input in SQL LIKE query"
+    },
+    {
+      "severity": "high",
+      "title": "GPU Tensor Memory Leak",
+      "cwe": "CWE-401",
+      "owasp_category": "ML01",
+      "line_number": 75,
+      "file_path": "vulnerable_ml_code.py",
+      "explanation": "Tensor allocated on CUDA device never moved to CPU or deleted"
+    }
+  ],
+  "performance_findings": [
+    {
+      "type": "gpu_memory",
+      "title": "FP32 dtype — should use BF16",
+      "saving_mb": 3584,
+      "file_path": "vulnerable_ml_code.py"
+    },
+    {
+      "type": "throughput",
+      "title": "N+1 embedding calls in loop",
+      "saving_mb": 0,
+      "file_path": "vulnerable_ml_code.py"
+    },
+    {
+      "type": "latency",
+      "title": "Model loaded inside request handler",
+      "saving_mb": 0,
+      "file_path": "vulnerable_ml_code.py"
+    },
+    {
+      "type": "gpu_memory",
+      "title": "Missing @torch.no_grad on inference",
+      "saving_mb": 512,
+      "file_path": "vulnerable_ml_code.py"
+    }
+  ]
+}
